@@ -1,4 +1,4 @@
-package com.dtomodel;
+package com.example.student_api.dtomodel;
 
 public class StudentDTO 
 {

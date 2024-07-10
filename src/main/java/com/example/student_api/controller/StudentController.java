@@ -3,7 +3,7 @@ package com.example.student_api.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dtomodel.StudentDTO;
+import com.example.student_api.dtomodel.StudentDTO;
 import com.example.student_api.entity.StudentEntity;
 import com.example.student_api.service.StudentService;
 
