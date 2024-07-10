@@ -19,6 +19,9 @@ public class StudentService
     public StudentDTO findStudentById(Long id)
     {
         StudentEntity studentEntity = studentRepository.findById(id).orElse(null);
+
+        System.out.println(studentEntity);
+
         return new StudentDTO(
             studentEntity.getId(), 
             studentEntity.getName(), 
@@ -26,13 +29,37 @@ public class StudentService
         );
     }
 
-    public StudentEntity saveStudent(StudentDTO studentDTO)
+    public StudentDTO saveStudent(StudentDTO studentDTO)
     {
         StudentEntity studentEntity = new StudentEntity(
             studentDTO.getName(), 
             studentDTO.getGender()
         );
-        return studentRepository.save(studentEntity);
+        StudentEntity saved = studentRepository.save(studentEntity);
+
+        return new StudentDTO(
+            saved.getId(), 
+            saved.getName(), 
+            saved.getGender()
+        );
+    }
+    
+    public StudentDTO saveStudent(StudentDTO studentDTO, Long studentId)
+    {
+        StudentEntity studentEntity = new StudentEntity(
+            studentDTO.getName(), 
+            studentDTO.getGender()
+        );
+        studentEntity.setId(studentId);
+
+        System.out.println(studentEntity);
+
+        StudentEntity saved = studentRepository.save(studentEntity);
+        return new StudentDTO(
+            saved.getId(), 
+            saved.getName(), 
+            saved.getGender()
+        );
     }
 
     public void deleteStudentById(Long id)

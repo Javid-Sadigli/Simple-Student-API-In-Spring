@@ -44,4 +44,14 @@ public class StudentEntity
         this.gender = gender;
     }
     
+    // toString method
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", name='" + getName() + "'" +
+            ", gender='" + getGender() + "'" +
+            "}";
+    }
+
 }

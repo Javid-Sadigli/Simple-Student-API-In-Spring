@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.student_api.dtomodel.StudentDTO;
-import com.example.student_api.entity.StudentEntity;
 import com.example.student_api.service.StudentService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,16 +33,15 @@ public class StudentController
     }
 
     @PostMapping
-    public StudentEntity saveStudent(@RequestBody StudentDTO student) 
+    public StudentDTO saveStudent(@RequestBody StudentDTO student) 
     {    
         return this.studentService.saveStudent(student);
     }
 
     @PutMapping("/{id}")
-    public StudentEntity updateStudent(@PathVariable Long id, @RequestBody StudentDTO updated)
+    public StudentDTO updateStudent(@PathVariable Long id, @RequestBody StudentDTO updated)
     {
-        updated.setId(id);
-        return this.studentService.saveStudent(updated);
+        return this.studentService.saveStudent(updated, id);
     }
 
     @DeleteMapping("/{id}")
