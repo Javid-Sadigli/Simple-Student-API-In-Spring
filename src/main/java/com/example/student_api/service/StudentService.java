@@ -2,6 +2,7 @@ package com.example.student_api.service;
 
 import org.springframework.stereotype.Service;
 
+import com.dtomodel.StudentDTO;
 import com.example.student_api.entity.StudentEntity;
 import com.example.student_api.repository.StudentRepository;
 
@@ -15,13 +16,22 @@ public class StudentService
         this.studentRepository = studentRepository;
     }
 
-    public StudentEntity findStudentById(Long id)
+    public StudentDTO findStudentById(Long id)
     {
-        return studentRepository.findById(id).orElse(null);
+        StudentEntity studentEntity = studentRepository.findById(id).orElse(null);
+        return new StudentDTO(
+            studentEntity.getId(), 
+            studentEntity.getName(), 
+            studentEntity.getGender()
+        );
     }
 
-    public StudentEntity saveStudent(StudentEntity studentEntity)
+    public StudentEntity saveStudent(StudentDTO studentDTO)
     {
+        StudentEntity studentEntity = new StudentEntity(
+            studentDTO.getName(), 
+            studentDTO.getGender()
+        );
         return studentRepository.save(studentEntity);
     }
 
@@ -29,6 +39,4 @@ public class StudentService
     {
         studentRepository.deleteById(id);
     }
-
-
 }
