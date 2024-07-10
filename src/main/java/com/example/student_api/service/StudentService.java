@@ -2,7 +2,7 @@ package com.example.student_api.service;
 
 import org.springframework.stereotype.Service;
 
-import com.dtomodel.StudentDTO;
+import com.example.student_api.dtomodel.StudentDTO;
 import com.example.student_api.entity.StudentEntity;
 import com.example.student_api.repository.StudentRepository;
 
