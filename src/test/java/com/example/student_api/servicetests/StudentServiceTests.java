@@ -3,6 +3,7 @@ package com.example.student_api.servicetests;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -31,6 +32,7 @@ public class StudentServiceTests
     /* Testing methods */
 
     @Test 
+    @DisplayName("Testing of findStudentById method")
     public void testFindStudentById()
     {
         String studentName = "Javid Sadigli", studentGender = "Male";
@@ -45,6 +47,6 @@ public class StudentServiceTests
 
         assertEquals(studentId, result.getId());
         assertEquals(studentName, result.getName());
-        assertEquals(studentGender, result.getGender());;
+        assertEquals(studentGender, result.getGender());
     }
 }
