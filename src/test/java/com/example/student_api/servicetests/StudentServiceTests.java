@@ -1,6 +1,10 @@
 package com.example.student_api.servicetests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -41,7 +45,7 @@ public class StudentServiceTests
         StudentEntity mockStudentEntity = new StudentEntity(studentName, studentGender);
         mockStudentEntity.setId(studentId);
 
-        Mockito.when(studentRepository.findById(studentId)).thenReturn(java.util.Optional.of(mockStudentEntity));
+        Mockito.when(studentRepository.findById(studentId)).thenReturn(Optional.of(mockStudentEntity));
 
         StudentDTO result = this.studentService.findStudentById(studentId); 
 
@@ -49,4 +53,26 @@ public class StudentServiceTests
         assertEquals(studentName, result.getName());
         assertEquals(studentGender, result.getGender());
     }
+    
+    @Test
+    @DisplayName("Testing of findStudentById method with non-existent id")
+    public void testFindStudentByIdNullId()
+    {
+        assertThrows(
+            NullPointerException.class, 
+            () -> {
+                StudentDTO result = this.studentService.findStudentById(-1L); 
+            }
+        ); 
+    }
+
+    // @Test
+    // @DisplayName("Testing of saveStudent method")
+    // public void testSaveStudent()
+    // {
+    //     String studentName = "Javid Sadigli", studentGender = "Male";
+    //     Long studentId = 1L; 
+    //     StudentDTO mockStudentDTO = new StudentDTO(studentId, studentName, studentGender);
+    // }
+    
 }
