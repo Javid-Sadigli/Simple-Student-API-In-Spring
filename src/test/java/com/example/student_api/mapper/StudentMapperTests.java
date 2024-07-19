@@ -1,6 +1,7 @@
 package com.example.student_api.mapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -32,8 +33,9 @@ public class StudentMapperTests
 
         StudentEntity studentEntity = this.studentMapper.toStudentEntity(studentDTO);
 
-        assertEquals(studentEntity.getName(), studentName);
-        assertEquals(studentEntity.getGender(), studentGender);
+        assertNotNull(studentEntity);
+        assertEquals(studentName, studentEntity.getName());
+        assertEquals(studentGender, studentEntity.getGender());
         assertNull(studentEntity.getId());
     }
 
@@ -50,9 +52,10 @@ public class StudentMapperTests
 
         StudentEntity studentEntity = this.studentMapper.toStudentEntity(studentDTO, studentId); 
 
-        assertEquals(studentEntity.getId(), studentId);
-        assertEquals(studentEntity.getName(), studentName);
-        assertEquals(studentEntity.getGender(), studentGender);
+        assertNotNull(studentEntity);
+        assertEquals(studentId, studentEntity.getId());
+        assertEquals(studentName, studentEntity.getName());
+        assertEquals(studentGender, studentEntity.getGender());
     }
 
     @Test
@@ -69,9 +72,9 @@ public class StudentMapperTests
         
         StudentDTO studentDTO = this.studentMapper.toStudentDTO(studentEntity);
 
-        assertEquals(studentDTO.getName(), studentName);
-        assertEquals(studentDTO.getGender(), studentGender);
-        assertEquals(studentDTO.getId(), studentId);
+        assertNotNull(studentDTO);
+        assertEquals(studentName, studentDTO.getName());
+        assertEquals(studentGender, studentDTO.getGender());
+        assertEquals(studentId, studentDTO.getId());
     }
-
 }

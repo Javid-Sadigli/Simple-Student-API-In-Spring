@@ -22,7 +22,6 @@ public class StudentService
     public StudentDTO findStudentById(Long id)
     {
         StudentEntity studentEntity = studentRepository.findById(id).orElse(null);
-        System.out.println(studentEntity);
         return this.studentMapper.toStudentDTO(studentEntity);
     }
 
@@ -36,7 +35,6 @@ public class StudentService
     public StudentDTO saveStudent(StudentDTO studentDTO, Long studentId)
     {
         StudentEntity studentEntity = this.studentMapper.toStudentEntity(studentDTO, studentId);
-        System.out.println(studentEntity);
         StudentEntity saved = studentRepository.save(studentEntity);
         return this.studentMapper.toStudentDTO(saved);
     }

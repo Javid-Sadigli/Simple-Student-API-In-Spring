@@ -1,7 +1,9 @@
 package com.example.student_api.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
@@ -34,6 +36,24 @@ public class StudentServiceTests
     {
         MockitoAnnotations.openMocks(this);
     }
+
+    @Test
+    public void shouldSaveStudent()
+    {
+        String studentName = "Javid Sadigli", studentGender = "Male";
+        StudentDTO studentDTO = new StudentDTO(studentName, studentGender);
+        StudentEntity studentEntity = new StudentEntity(studentName, studentGender);
+
+        when(this.studentMapper.toStudentEntity(studentDTO)).thenReturn(studentEntity);
+        when(this.studentRepository.save(studentEntity)).thenReturn(studentEntity); 
+        when(this.studentMapper.toStudentDTO(studentEntity)).thenReturn(studentDTO);
+
+        StudentDTO savedStudent = this.studentService.saveStudent(studentDTO);
+        
+        assertEquals(studentName, savedStudent.getName());
+        assertEquals(studentGender, savedStudent.getGender());
+    }
+
 
     /* Testing methods */
 

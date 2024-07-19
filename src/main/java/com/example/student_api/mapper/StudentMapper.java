@@ -19,6 +19,7 @@ public class StudentMapper
 
     public StudentEntity toStudentEntity(StudentDTO studentDTO)
     {
+        System.out.println("From student mapper : " + studentDTO);
         return new StudentEntity(
             studentDTO.getName(),
             studentDTO.getGender()
