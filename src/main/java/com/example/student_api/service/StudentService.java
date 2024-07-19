@@ -4,62 +4,41 @@ import org.springframework.stereotype.Service;
 
 import com.example.student_api.dtomodel.StudentDTO;
 import com.example.student_api.entity.StudentEntity;
+import com.example.student_api.mapper.StudentMapper;
 import com.example.student_api.repository.StudentRepository;
 
 @Service
 public class StudentService 
 {
     private final StudentRepository studentRepository; 
+    private final StudentMapper studentMapper; 
 
-    public StudentService(StudentRepository studentRepository) 
+    public StudentService(StudentRepository studentRepository, StudentMapper studentMapper) 
     {
         this.studentRepository = studentRepository;
+        this.studentMapper = studentMapper;
     }
 
     public StudentDTO findStudentById(Long id)
     {
         StudentEntity studentEntity = studentRepository.findById(id).orElse(null);
-
         System.out.println(studentEntity);
-
-        return new StudentDTO(
-            studentEntity.getId(), 
-            studentEntity.getName(), 
-            studentEntity.getGender()
-        );
+        return this.studentMapper.toStudentDTO(studentEntity);
     }
 
     public StudentDTO saveStudent(StudentDTO studentDTO)
     {
-        StudentEntity studentEntity = new StudentEntity(
-            studentDTO.getName(), 
-            studentDTO.getGender()
-        );
+        StudentEntity studentEntity = this.studentMapper.toStudentEntity(studentDTO);
         StudentEntity saved = studentRepository.save(studentEntity);
-
-        return new StudentDTO(
-            saved.getId(), 
-            saved.getName(), 
-            saved.getGender()
-        );
+        return this.studentMapper.toStudentDTO(saved);
     }
     
     public StudentDTO saveStudent(StudentDTO studentDTO, Long studentId)
     {
-        StudentEntity studentEntity = new StudentEntity(
-            studentDTO.getName(), 
-            studentDTO.getGender()
-        );
-        studentEntity.setId(studentId);
-
+        StudentEntity studentEntity = this.studentMapper.toStudentEntity(studentDTO, studentId);
         System.out.println(studentEntity);
-
         StudentEntity saved = studentRepository.save(studentEntity);
-        return new StudentDTO(
-            saved.getId(), 
-            saved.getName(), 
-            saved.getGender()
-        );
+        return this.studentMapper.toStudentDTO(saved);
     }
 
     public void deleteStudentById(Long id)

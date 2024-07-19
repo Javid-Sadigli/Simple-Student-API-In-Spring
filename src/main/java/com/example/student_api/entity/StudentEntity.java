@@ -24,6 +24,13 @@ public class StudentEntity
         this.gender = gender;
     }
 
+    public StudentEntity(Long id, String name, String gender)
+    {
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
+    }
+
     // Getters and setters
     public Long getId() {
         return this.id;
