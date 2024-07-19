@@ -10,27 +10,52 @@ public class StudentMapper
 {
     public StudentDTO toStudentDTO(StudentEntity studentEntity)
     {
-        return new StudentDTO(
-            studentEntity.getId(),
-            studentEntity.getName(),
-            studentEntity.getGender()
-        );
+        try
+        {
+            return new StudentDTO(
+                studentEntity.getId(),
+                studentEntity.getName(),
+                studentEntity.getGender()
+            );
+        }
+        catch (NullPointerException e)
+        {
+            return null; 
+        }
     }
 
     public StudentEntity toStudentEntity(StudentDTO studentDTO)
     {
-        System.out.println("From student mapper : " + studentDTO);
-        return new StudentEntity(
-            studentDTO.getName(),
-            studentDTO.getGender()
-        );
+        try
+        {
+            return new StudentEntity(
+                studentDTO.getName(),
+                studentDTO.getGender()
+            );
+        }
+        catch (NullPointerException e)
+        {
+            return null;
+        }
     }
     public StudentEntity toStudentEntity(StudentDTO studentDTO, Long studentId)
     {
-        return new StudentEntity(
-            studentId,
-            studentDTO.getName(), 
-            studentDTO.getGender()
-        );
+        if(studentId == null)
+        {
+            return null; 
+        }
+        
+        try
+        {
+            return new StudentEntity(
+                studentId,
+                studentDTO.getName(), 
+                studentDTO.getGender()
+            );
+        }
+        catch (NullPointerException e)
+        {
+            return null; 
+        }
     }
 }

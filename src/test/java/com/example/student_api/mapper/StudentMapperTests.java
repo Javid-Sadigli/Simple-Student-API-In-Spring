@@ -77,4 +77,51 @@ public class StudentMapperTests
         assertEquals(studentGender, studentDTO.getGender());
         assertEquals(studentId, studentDTO.getId());
     }
+
+    @Test 
+    @DisplayName("Testing if StudentMapper.toStudentEntity() method will return null if the id is null.")
+    public void shouldReturnNullWhenIdIsNull()
+    {
+        String studentName = "Javid Sadigli", studentGender = "male";
+        Long studentId = null;
+        StudentDTO studentDTO = new StudentDTO(
+            studentName, 
+            studentGender
+        );  
+
+        StudentEntity studentEntity = this.studentMapper.toStudentEntity(studentDTO, studentId); 
+
+        assertNull(studentEntity);
+    }
+
+    @Test 
+    @DisplayName("Testing if StudentMapper.toStudentEntity() method will return null if the studentDTO is null.")
+    public void shouldReturnNullWhenStudentDtoIsNull()
+    {
+        StudentDTO studentDTO = null;
+        Long studentId = 1L;
+
+        StudentEntity studentEntity = this.studentMapper.toStudentEntity(studentDTO, studentId);
+
+        assertNull(studentEntity);
+    }
+
+    @Test
+    @DisplayName("Testing if StudentMapper.toStudentEntity() method will return null if the studentDTO is null (without giving studentId)")
+    public void shouldReturnNullWhenStudentDtoIsNull_WithoutGivingId()
+    {
+        StudentDTO studentDTO = null;
+        StudentEntity studentEntity = this.studentMapper.toStudentEntity(studentDTO);
+        assertNull(studentEntity);
+    }
+
+    @Test 
+    @DisplayName("Testing if StudentMapper.toStudentDTO() method will return null if the studentEntity is null.")
+    public void shouldReturnNullWhenStudentEntityIsNull()
+    {
+        StudentEntity studentEntity = null;
+        StudentDTO studentDTO = this.studentMapper.toStudentDTO(studentEntity);
+        
+        assertNull(studentDTO);
+    }
 }
