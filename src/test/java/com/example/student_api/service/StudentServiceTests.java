@@ -117,6 +117,4 @@ public class StudentServiceTests
         StudentDTO checkUpdatedStudentDTO = this.studentService.saveStudent(studentDTO, studentId);
         assertNull(checkUpdatedStudentDTO);
     }
-
-
 }
