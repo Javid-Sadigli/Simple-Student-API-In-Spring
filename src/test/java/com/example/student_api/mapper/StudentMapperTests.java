@@ -25,10 +25,9 @@ public class StudentMapperTests
     @DisplayName("Testing if StudentMapper can convert StudentDTO to StudentEntity without id.")
     public void shouldMapStudentDtoToStudentEntityWithoutId()
     {
-        String studentName = "Javid Sadigli", studentGender = "male";
+        String studentName = "Javid Sadigli", studentGender = "male", studentEmail = "javid.sadigli@gmail.com", studentPassword = "javid123";
         StudentDTO studentDTO = new StudentDTO(
-            studentName,
-            studentGender
+            studentName, studentGender, studentEmail, studentPassword
         ); 
 
         StudentEntity studentEntity = this.studentMapper.toStudentEntity(studentDTO);
@@ -36,6 +35,8 @@ public class StudentMapperTests
         assertNotNull(studentEntity);
         assertEquals(studentName, studentEntity.getName());
         assertEquals(studentGender, studentEntity.getGender());
+        assertEquals(studentEmail, studentEntity.getEmail());
+        assertEquals(studentPassword, studentEntity.getPassword());
         assertNull(studentEntity.getId());
     }
 
@@ -43,11 +44,10 @@ public class StudentMapperTests
     @DisplayName("Testing if StudentMapper can convert StudentDTO to StudentEntity with id.")
     public void shouldMapStudentDtoToStudentEntityWithId()
     {
-        String studentName = "Javid Sadigli", studentGender = "male";
+        String studentName = "Javid Sadigli", studentGender = "male", studentEmail = "javid.sadigli@gmail.com", studentPassword = "javid123";
         Long studentId = 1L;
         StudentDTO studentDTO = new StudentDTO(
-            studentName,
-            studentGender
+            studentName, studentGender, studentEmail, studentPassword
         ); 
 
         StudentEntity studentEntity = this.studentMapper.toStudentEntity(studentDTO, studentId); 
@@ -56,18 +56,18 @@ public class StudentMapperTests
         assertEquals(studentId, studentEntity.getId());
         assertEquals(studentName, studentEntity.getName());
         assertEquals(studentGender, studentEntity.getGender());
+        assertEquals(studentEmail, studentEntity.getEmail());
+        assertEquals(studentPassword, studentEntity.getPassword());
     }
 
     @Test
     @DisplayName("Testing if StudentMapper can convert StudentEntity to StudentDTO.")
     public void shouldMapStudentEntityToStudentDto()
     {
-        String studentName = "Javid Sadigli", studentGender = "male";
+        String studentName = "Javid Sadigli", studentGender = "male", studentEmail = "javid.sadigli@gmail.com", studentPassword = "javid123";
         Long studentId = 1L;
         StudentEntity studentEntity = new StudentEntity(
-            studentId,
-            studentName,
-            studentGender
+            studentId, studentName, studentGender, studentEmail, studentPassword
         );
         
         StudentDTO studentDTO = this.studentMapper.toStudentDTO(studentEntity);
@@ -76,17 +76,18 @@ public class StudentMapperTests
         assertEquals(studentName, studentDTO.getName());
         assertEquals(studentGender, studentDTO.getGender());
         assertEquals(studentId, studentDTO.getId());
+        assertEquals(studentEmail, studentDTO.getEmail());
+        assertEquals(studentPassword, studentDTO.getPassword());
     }
 
     @Test 
     @DisplayName("Testing if StudentMapper.toStudentEntity() method will return null if the id is null.")
     public void shouldReturnNullWhenIdIsNull()
     {
-        String studentName = "Javid Sadigli", studentGender = "male";
+        String studentName = "Javid Sadigli", studentGender = "male", studentEmail = "javid.sadigli@gmail.com", studentPassword = "javid123";
         Long studentId = null;
         StudentDTO studentDTO = new StudentDTO(
-            studentName, 
-            studentGender
+            studentName, studentGender, studentEmail, studentPassword
         );  
 
         StudentEntity studentEntity = this.studentMapper.toStudentEntity(studentDTO, studentId); 

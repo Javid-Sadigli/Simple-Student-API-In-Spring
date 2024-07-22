@@ -15,20 +15,26 @@ public class StudentEntity
     private Long id; 
     private String name; 
     private String gender; 
+    private String email; 
+    private String password; 
 
     public StudentEntity() {}
 
-    public StudentEntity(String name, String gender) 
+    public StudentEntity(String name, String gender, String email, String password) 
     {
         this.name = name;
         this.gender = gender;
+        this.email = email;
+        this.password = password;
     }
 
-    public StudentEntity(Long id, String name, String gender)
+    public StudentEntity(Long id, String name, String gender, String email, String password)
     {
         this.id = id;
         this.name = name;
         this.gender = gender;
+        this.email = email;
+        this.password = password;
     }
 
     // Getters and setters
@@ -50,15 +56,32 @@ public class StudentEntity
     public void setGender(String gender) {
         this.gender = gender;
     }
-    
-    // toString method
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "{" +
             " id='" + getId() + "'" +
             ", name='" + getName() + "'" +
             ", gender='" + getGender() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", password='" + getPassword() + "'" +
             "}";
     }
+    
 
 }

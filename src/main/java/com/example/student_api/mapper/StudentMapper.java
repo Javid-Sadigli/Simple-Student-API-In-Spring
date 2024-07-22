@@ -15,7 +15,9 @@ public class StudentMapper
             return new StudentDTO(
                 studentEntity.getId(),
                 studentEntity.getName(),
-                studentEntity.getGender()
+                studentEntity.getGender(),
+                studentEntity.getEmail(),
+                studentEntity.getPassword()
             );
         }
         catch (NullPointerException e)
@@ -30,7 +32,9 @@ public class StudentMapper
         {
             return new StudentEntity(
                 studentDTO.getName(),
-                studentDTO.getGender()
+                studentDTO.getGender(),
+                studentDTO.getEmail(),
+                studentDTO.getPassword()
             );
         }
         catch (NullPointerException e)
@@ -50,7 +54,9 @@ public class StudentMapper
             return new StudentEntity(
                 studentId,
                 studentDTO.getName(), 
-                studentDTO.getGender()
+                studentDTO.getGender(), 
+                studentDTO.getEmail(), 
+                studentDTO.getPassword()
             );
         }
         catch (NullPointerException e)
