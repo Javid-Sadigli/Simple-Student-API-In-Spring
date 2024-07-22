@@ -2,6 +2,7 @@ package com.example.student_api.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
@@ -39,7 +40,7 @@ public class StudentServiceTests
     @DisplayName("Testing if StudentService is saving Student.")
     public void shouldSaveStudent()
     {
-        String studentName = "Javid Sadigli", studentGender = "Male";
+        String studentName = "Javid Sadigli", studentGender = "male";
         StudentDTO studentDTO = new StudentDTO(studentName, studentGender);
         StudentEntity studentEntity = new StudentEntity(studentName, studentGender);
 
@@ -96,4 +97,26 @@ public class StudentServiceTests
         assertEquals(studentName, checkFoundStudentDTO.getName());
         assertEquals(studentGender, checkFoundStudentDTO.getGender());
     }
+
+    @Test
+    @DisplayName("Testing if StudentService is finding student with null id.")
+    public void shouldReturnNullWhenStudentIdIsNull()
+    {
+        Long studentId = null;
+        StudentDTO checkFoundStudentDTO = this.studentService.findStudentById(studentId);
+        assertNull(checkFoundStudentDTO);
+    }
+
+    @Test
+    @DisplayName("Testing if StudentService is updating student with null id.")
+    public void shouldReturnNullWhenStudentIdForUpdateIsNull()
+    {
+        Long studentId = null;
+        String newStudentName = "Javid Sadigli", newStudentGender = "male";
+        StudentDTO studentDTO = new StudentDTO(newStudentName, newStudentGender);
+        StudentDTO checkUpdatedStudentDTO = this.studentService.saveStudent(studentDTO, studentId);
+        assertNull(checkUpdatedStudentDTO);
+    }
+
+
 }
