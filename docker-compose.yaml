@@ -38,7 +38,6 @@ services:
         PGADMIN_DEFAULT_PASSWORD: admin
       ports:
         - "2000:80"
-  
-
+        
 volumes:
   postgres_data:
